@@ -1,5 +1,7 @@
 package fr.valtech.tdd.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -32,4 +34,18 @@ public class ChambreDaoImpl implements ChambreDao {
 		return chambre;
 	}
 
+	@Override
+	public List<Chambre> findByCapacite(int capacite) {
+		EntityManager entityManager = factory.createEntityManager();
+		entityManager.getTransaction().begin();
+
+		Query q = entityManager
+				.createQuery("select c from Chambre c where c.capacite = :capacite");
+		q.setParameter("capacite", capacite);
+		List<Chambre> chambres = q.getResultList();
+
+		entityManager.getTransaction().rollback();
+		entityManager.close();
+		return chambres;
+	}
 }

@@ -1,5 +1,7 @@
 package fr.valtech.tdd.business;
 
-public interface ConsulterDisponibiliteChambreBusiness {
+import java.util.Date;
 
+public interface ConsulterDisponibiliteChambreBusiness {
+	boolean consulterDisponibiliteChambre(int capacite, Date nuitee);
 }

@@ -3,6 +3,7 @@ package fr.valtech.tdd.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,7 +48,7 @@ public class Reservation {
 		this.nuitee = nuitee;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	public void setChambre(Chambre chambre) {
 		this.chambre = chambre;
 	}
@@ -88,6 +89,17 @@ public class Reservation {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("id : " + id);
+		sb.append("nuitee : " + nuitee);
+		sb.append("nomClient : " + nomClient);
+		sb.append("chambre : " + chambre);
+
+		return sb.toString();
 	}
 
 }

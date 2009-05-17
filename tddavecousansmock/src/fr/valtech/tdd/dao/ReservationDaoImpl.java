@@ -22,12 +22,15 @@ public class ReservationDaoImpl implements ReservationDao {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
-		// Query namedQuery = em.createQuery("select r.id from Reservation ");
-		// List<Integer> reservationsId = namedQuery.getResultList();
-		// .createQuery("select c from Reservation r JOIN r.chambre as c where r.nuitee=:nuitee ");
+		Query namedQuery = em
+		// .createQuery("select r.id from Reservation ");
+				// List<Integer> reservationsId = namedQuery.getResultList();
+				// .createQuery("select c from Reservation r JOIN r.chambre as c where r.nuitee=:nuitee ");
+				.createQuery("select c from Reservation r JOIN FETCH r.chambre c where r.nuitee = :nuitee");
 		// .createQuery("select c from Chambre c where c.reservations.id in (select r.id from Reservation r where r.nuitee= :nuitee)");
 		// .createQuery("select c from Chambre c where c.reservations.nuitee= :nuitee");
-		// namedQuery.setParameter("nuitee", nuitee);
+		namedQuery.setParameter("nuitee", nuitee);
+		List<Reservation> ouaich = namedQuery.getResultList();
 		Query namedQuery2 = em.createQuery("select c from Chambre c");
 
 		// namedQuery2.setParameter("reservationsId", reservationsId);

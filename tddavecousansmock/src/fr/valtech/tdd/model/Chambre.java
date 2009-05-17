@@ -109,4 +109,15 @@ public class Chambre {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("id : " + id);
+		sb.append("numero : " + numero);
+		sb.append("capacite : " + capacite);
+		sb.append("reservations : " + reservations);
+
+		return sb.toString();
+	}
+
 }

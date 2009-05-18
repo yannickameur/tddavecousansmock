@@ -1,7 +1,6 @@
 package fr.valtech.tdd;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,10 +12,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import fr.valtech.tdd.business.ConsulterDisponibiliteChambreBusinessImplDependencyTest;
+import fr.valtech.tdd.business.GererChambresBusinessImplTest;
 import fr.valtech.tdd.dao.ChambreDaoImplTest;
-import fr.valtech.tdd.enums.EnumCategorie;
+import fr.valtech.tdd.helper.DateHelper;
 import fr.valtech.tdd.model.Chambre;
+import fr.valtech.tdd.model.EnumCategorie;
 import fr.valtech.tdd.model.Reservation;
 
 @RunWith(Suite.class)
@@ -24,7 +24,7 @@ import fr.valtech.tdd.model.Reservation;
 // les tests de DAO
 		ChambreDaoImplTest.class,//
 		// les tests business
-		ConsulterDisponibiliteChambreBusinessImplDependencyTest.class //
+		GererChambresBusinessImplTest.class //
 })
 public class AllTests {
 	private static final String PERSISTENCE_UNIT_NAME = "chambres";
@@ -58,9 +58,7 @@ public class AllTests {
 				}
 				chambre.setDescription("Chambre standard pour couple");
 				chambre.setCapacite(i);
-				GregorianCalendar calendar = new GregorianCalendar();
-				calendar.set(2009, 5, 30, 0, 0, 0);
-				Date nuitee = calendar.getTime();
+				Date nuitee = DateHelper.createDate(2009, 5, 30);
 
 				// on reserve les chambres 101 et 102 le 30 mai 2009
 				if (i == 1) {

@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import fr.valtech.tdd.enums.EnumCategorie;
 
 @Entity
 public class Chambre {

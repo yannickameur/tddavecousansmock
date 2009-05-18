@@ -7,11 +7,24 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Test;
 
-import fr.valtech.tdd.enums.EnumCategorie;
 import fr.valtech.tdd.model.Chambre;
+import fr.valtech.tdd.model.EnumCategorie;
 
 public class ChambreDaoImplTest {
+	@Test
+	public void factory() {
+		new ChambreDaoImpl();
+		new ChambreDaoImpl();
+	}
 
+	@Test
+	public void findAll() {
+		ChambreDao chambreDao = new ChambreDaoImpl();
+		List<Chambre> chambres = chambreDao.findAll();
+		Assert.assertEquals(4, chambres.size());
+	}
+
+	// TODO : reprendre l'init ici : pour copier/coller dans le business test
 	@Test
 	public void findByIdTest() {
 		ChambreDao chambreDao = new ChambreDaoImpl();
@@ -20,8 +33,7 @@ public class ChambreDaoImplTest {
 		Assert.assertNotNull(chambre);
 		Assert.assertEquals(3, chambre.getId());
 		Assert.assertEquals(102, chambre.getNumero());
-		Assert.assertEquals("Chambre standard pour couple", chambre
-				.getDescription());
+		Assert.assertEquals("Chambre standard pour couple", chambre.getDescription());
 		Assert.assertEquals(2, chambre.getCapacite());
 		Assert.assertEquals(EnumCategorie.STANDARD, chambre.getCategorie());
 

@@ -10,4 +10,6 @@ public interface ChambreDao {
 
 	List<Chambre> findByCapacite(int capacite);
 
+	List<Chambre> findAll();
+
 }

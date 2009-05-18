@@ -17,7 +17,6 @@ public class ReservationDaoImpl implements ReservationDao {
 	private static final String PERSISTENCE_UNIT_NAME = "chambres";
 	private EntityManagerFactory factory;
 
-	@Override
 	public List<Chambre> chercherChambresLibres(Date nuitee) {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
@@ -40,8 +39,7 @@ public class ReservationDaoImpl implements ReservationDao {
 		List<Chambre> chambresLibresPourCetteNuitee = new ArrayList<Chambre>();
 		List<Chambre> chambres = namedQuery2.getResultList();
 		for (Chambre chambre : chambres) {
-			if (!chambre.getReservations().contains(
-					reservationNuiteeDu30Mai2009)) {
+			if (!chambre.getReservations().contains(reservationNuiteeDu30Mai2009)) {
 				chambresLibresPourCetteNuitee.add(chambre);
 			}
 		}

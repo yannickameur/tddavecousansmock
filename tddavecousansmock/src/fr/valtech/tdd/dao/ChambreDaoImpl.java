@@ -4,48 +4,55 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import fr.valtech.tdd.model.Chambre;
 
 public class ChambreDaoImpl implements ChambreDao {
 
-	private static final String PERSISTENCE_UNIT_NAME = "chambres";
-	private EntityManagerFactory factory;
+	private EntityManagerFactory factory = HotelEntityManagerFactory.getFactory();
 
-	public ChambreDaoImpl() {
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+	public void setFactory(EntityManagerFactory factory) {
+		this.factory = factory;
 	}
 
-	@Override
 	public Chambre findById(int id) {
-
 		EntityManager entityManager = factory.createEntityManager();
-		entityManager.getTransaction().begin();
-
-		Query q = entityManager
-				.createQuery("select c from Chambre c where c.id = :id");
-		q.setParameter("id", id);
-		Chambre chambre = (Chambre) q.getSingleResult();
-
-		entityManager.getTransaction().rollback();
-		entityManager.close();
-		return chambre;
+		try {
+			Query query = entityManager.createQuery("select c from Chambre c where c.id = :id");
+			query.setParameter("id", id);
+			return (Chambre) query.getSingleResult();
+		}
+		finally {
+			entityManager.close();
+		}
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
 	public List<Chambre> findByCapacite(int capacite) {
 		EntityManager entityManager = factory.createEntityManager();
-		entityManager.getTransaction().begin();
 
-		Query q = entityManager
-				.createQuery("select c from Chambre c where c.capacite = :capacite");
-		q.setParameter("capacite", capacite);
-		List<Chambre> chambres = q.getResultList();
-
-		entityManager.getTransaction().rollback();
-		entityManager.close();
+		List<Chambre> chambres;
+		try {
+			Query q = entityManager.createQuery("select c from Chambre c where c.capacite = :capacite");
+			q.setParameter("capacite", capacite);
+			chambres = q.getResultList();
+		}
+		finally {
+			entityManager.close();
+		}
 		return chambres;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Chambre> findAll() {
+		EntityManager entityManager = factory.createEntityManager();
+		try {
+			Query query = entityManager.createQuery("select c from Chambre c");
+			return query.getResultList();
+		}
+		finally {
+			entityManager.close();
+		}
 	}
 }

@@ -2,6 +2,7 @@ package fr.valtech.tdd.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -48,7 +49,7 @@ public class Reservation {
 		this.nuitee = nuitee;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	public void setChambre(Chambre chambre) {
 		this.chambre = chambre;
 	}

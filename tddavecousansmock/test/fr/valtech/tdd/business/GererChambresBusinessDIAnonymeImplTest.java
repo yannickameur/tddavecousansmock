@@ -10,6 +10,7 @@ import org.junit.Test;
 import fr.valtech.tdd.dao.ChambreDao;
 import fr.valtech.tdd.helper.DateHelper;
 import fr.valtech.tdd.model.Chambre;
+import fr.valtech.tdd.model.Reservation;
 
 public class GererChambresBusinessDIAnonymeImplTest {
 
@@ -28,13 +29,13 @@ public class GererChambresBusinessDIAnonymeImplTest {
 			}
 
 			@Override
-			public List<Chambre> findByCapacite(int capacite) {
+			public Chambre findById(int id) {
 				return null;
 			}
 
 			@Override
-			public Chambre findById(int id) {
-				return null;
+			public int reserverChambre(Reservation reservation) {
+				return 0;
 			}
 
 		};

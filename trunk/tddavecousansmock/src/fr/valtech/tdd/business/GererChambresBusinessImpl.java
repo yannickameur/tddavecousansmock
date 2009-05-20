@@ -15,6 +15,9 @@ public class GererChambresBusinessImpl implements GererChambresBusiness {
 	 * si nuitee == null return true => BUG
 	 */
 	public boolean consulterDisponibiliteChambre(int capacite, Date nuitee) {
+		if (nuitee == null) {
+			throw new IllegalArgumentException();
+		}
 		ChambreDao chambreDaoImpl = new ChambreDaoImpl();
 		List<Chambre> chambres = chambreDaoImpl.findAll();
 		for (Chambre chambre : chambres) {

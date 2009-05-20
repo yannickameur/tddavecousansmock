@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Chambre {
 	@Id
@@ -32,6 +31,10 @@ public class Chambre {
 	public Chambre(int id, int numero) {
 		this.id = id;
 		this.numero = numero;
+	}
+
+	public Chambre(int id) {
+		this.id = id;
 	}
 
 	public int getId() {

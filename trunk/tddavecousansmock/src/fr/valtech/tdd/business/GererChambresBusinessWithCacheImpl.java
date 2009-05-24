@@ -7,7 +7,8 @@ import fr.valtech.tdd.dao.ChambreDao;
 import fr.valtech.tdd.model.Chambre;
 import fr.valtech.tdd.model.Reservation;
 
-public class GererChambresBusinessWithCacheImpl implements GererChambresBusiness {
+public class GererChambresBusinessWithCacheImpl implements
+		GererChambresBusiness {
 
 	private ChambreDao chambreDao;
 	private List<Chambre> chambres;

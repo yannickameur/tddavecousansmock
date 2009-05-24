@@ -31,4 +31,5 @@ public class GererChambresBusinessDIMockImplTest {
 		Assert.assertTrue(dispoChambre2Personnes30Mai2009);
 		EasyMock.verify(chambreDao);
 	}
+
 }
